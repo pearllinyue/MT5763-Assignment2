@@ -1,0 +1,441 @@
+---
+title: "MT5763-Project2 Report"
+author: "Student ID: 180025784"
+date: "Due 5 Novmber 2018"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Executive Summary
+The report to build a linear model that predicts Oxygen intake rates, which is a measure of aerobic fitness. The data used in this report is from the study of Rawlings (1998), *Applied Regression Analysis: A Research Tool* 2nd Edition. The final model was fitted using linear regression, diagnosed using ANOVA, AIC, qqnorm, qqline, shapiro test, ncvtest, Durbin Watson Test and updatad to a good one. The confidence intervals are provided by the bootstrapping function written by the group work of all members of Drunken Master2. The randomisation test is also carried out. The final model states that the Oxygen intake rates has a strong relationship with age, weight, runtime, restpulse and maxpulse.
+\pagebreak
+
+## Introduction
+The improvement of bootstrap function completed by Drunken Master2 provided the basic code for the conduct of this project. The data used by this project is provided by Rawlings (1998).
+
+The purpose of the investigation of this report is to seek the best model that predicts Oxygen intake rates based on a list of measurements which can be obtained easily. All the data includes the following seven variables from 31 male samples as below:
+
+• Age: Age in years of 31 samples
+
+• Weight: Weight in kg of 31 samples
+
+• Oxygen: Oxygen intake rate in *ml*/kg body weight per minute
+
+• RunTime: time for each sample to run 1.5 miles in minutes
+
+• RestPulse: heart rate when having a rest
+
+• RunPulse: heart rate after running
+
+• MaxPulse: maximum heart rate during the run
+
+The intended audience of this report should be those are statistically literate, but not familiar with computer-intensive inference. The conduct of this project are all used R 3.5.1 (R, 2018).
+
+\pagebreak
+
+## Methods
+Due to the fact that the target audience of this report are not familiar with computer-intensive inference, the methods mainly contains the interpretation of bootstrapping and randomisation. The aim of these is to carry out effectively statistical simulations.
+
+### 1 Bootstrapping function for Confidence Intervals
+Bootstrapping method is a uniform sample that is put back from a given training set, in other words, whenever a sample is selected, it may be selected again and added to the training set again. The method for providing confidence intervals was present by Bradley Efron (1987). For small data set，bootstrapping works well. Boostrapping generates approximate sampling distributions of parameters to get confidence intervals
+
+### 2 Randomisation Tests
+In randomisation tests, *H0* refers to null hypothesis whilst *H1* represents alternative hypothesis. Randomisation tests generates parameter distributions assuming if *H0* is true and can get *p*-values. Actually, there are three main ways of randomisation *t*-test as below:
+
+• Comparison of means of two sampled populations
+
+  *H0*: the means of two populations are equal
+  
+  *H1*: the means of two populations are not equal
+
+• Comparison of means of a sampled population that of some hypothesised value
+
+  *H0*: the means of the population is equal to theoretial constant
+  
+  *H1*: the means of two populations is equal to theoretial constant
+  
+• Comparison of the variant for analysing paired observations
+
+  *H0*: the slope of the relationship between explanatory variable and response variable is zero - no linear association
+  
+  *H1*: the slope of the relationship between explanatory variable and response variable is not zero - linear association exists
+  
+\pagebreak
+
+## Results
+### 1 Model Fitting
+The initial model was fitted with all other variables, including Age, Weight, RunTime, RestPulse and MaxPulse. The coefficients of these variables regarding to Oxygen can be seen in Figure 1.
+
+```{r coefficients of initial model, echo=FALSE}
+coeini <- matrix(c("(Intercept)", 102.934,  
+                   "Age", -0.227,
+                   "Weight", -0.074,
+                   "RunTime", -2.629,
+                   "RestPulse", -0.022,
+                   "RunPulse", -0.370,
+                   "MaxPulse", 0.303), byrow = TRUE, ncol = 2)
+knitr::kable(coeini, digits = 3, caption = "Figure 1: Coefficients of the variables in the model", 
+             col.names = c("Variable", "Coefficient"))
+```
+
+Further analysis method ANOVA was used for initial model as in Figure 2. In Figure 2, we can see the p-value of each variable regarding to Oxygen. It is clear that RunTime has the most strongly significant correlation with Oxygen while RestPulse and Weight coule be not be very related to Oxygen. Thus, these two variables would probably be abandoned when we better the model. Also, RunPulse has a comparatively strongly significant correlation and MaxPulse and Age also affect Oxygen.
+
+```{r ANOVA of initial model, echo=FALSE}
+anovaini <- matrix(c( "Age", 0.032,
+                   "Weight", 0.187,
+                   "RunTime", 0.000,
+                   "RestPulse", 0.747,
+                   "RunPulse", 0.005,
+                   "MaxPulse", 0.036), byrow = TRUE, ncol = 2)
+knitr::kable(anovaini, digits = 3, caption = "Figure 2: ANOVA of the initial model", 
+             col.names = c("Variable", "p-value"))
+```
+
+Generally, Akaike Information Criterion (AIC) was used to select several fitted model objects to update the initial model. AIC method offered two models, one contains all six variables whose AIC score is 58.16, another one contains five variables (Age, Weight, RunTime, RunPulse and MaxPulse) whose AIC score is 56.3. Thus, AIC method automatically chose the latter one to be the new model. Then ANOVA method would be used again to check the variables of new model and see the p-value of each variable as in Figure 3. Although Weight still not seems to be sigificantly relevant with Oxygen because its p-value is more than 0.05, the other variables all shows inordinately to be related to Oxygen, which can be inferred that the new model is much better than the initial one.
+
+```{r ANOVA of new model, echo=FALSE}
+anovaini <- matrix(c( "Age", 0.030,
+                   "Weight", 0.187,
+                   "RunTime", 0.000,
+                   "RunPulse", 0.004,
+                   "MaxPulse", 0.032), byrow = TRUE, ncol = 2)
+knitr::kable(anovaini, digits = 3, caption = "Figure 3: ANOVA of the new model", 
+             col.names = c("Variable", "p-value"))
+```
+
+The model diagnostics was started to check the shape of errors by distribution of residuals.The QQ plot as well as the Shapiro-Wilks test was used in this report. The QQ plot and QQ norm can be seen in Figure 4 which displays the data set fits this model pretty good. Also, the Shapiro-Wilks test shows that w = 0.92131, which means the data fits well with the normal distribution in that the closer w is to 1, the model fits better with the normal distribution.
+
+###### Figure 4: QQ plot of new model
+```{r qqplot for model after AIC, eval=TRUE,echo=FALSE}
+fitness <- read.csv("/Users/apple/Desktop/MT5763/Assignment 2/fitness.csv", header = T)
+Oxygen_Model <- lm(Oxygen~., data = fitness)
+Oxygen_Model <- lm(Oxygen~., data = fitness)
+qqnorm(resid(Oxygen_Model))
+qqline(resid(Oxygen_Model))
+```
+
+In addtion, the histogram of residuals of the new model can be seen in Figure 5. We can also track down the extreme residuals which shows that data in Row 15 and 17 are having extreme residuals. 
+
+###### Figure 5: histogram of residuals of new model
+```{r hist for model after AIC, eval=TRUE,echo=FALSE}
+hist(resid(Oxygen_Model))
+```
+
+The next step of model diagnostics is error distribution, including check variance of residuals and Breusch-Pagan test. The error spread of the new model can be plotted in Figure 6. The output of ncvTest (i.e. Breusch-Pagan test) is p = 0.77806, which means to choose *H1* that the error variance varies with the level of the fitted value.
+
+###### Figure 6: plot of residuals spread
+```{r plot of residuals spread, eval=TRUE,echo=FALSE}
+Oxygen_Resid <- resid(Oxygen_Model)
+plot(fitted(Oxygen_Model), Oxygen_Resid, ylab = 'residuals', xlab = 'Fitted values')
+```
+
+The following step is to check serial correlation of residuals by using Durbin-Watson test. The *p*-value of this test is 0.374 > 0.05, which means the errors are correlated.
+
+And the final step is to check collinearity of the model. Figure 7 shows the dependencies between covariates and we use this to update the model into a new altered model. In additionl, Variance Inflation Factor (VIF) was used to check if multicollinearity exists between variables in Figure 8.
+
+###### Figure 7: Dependencies between covarites
+```{r dependencies between covarites, eval=TRUE,echo=FALSE}
+library(GGally)
+library(tidyverse)
+numericOnly <- fitness %>% select_if(is.numeric)
+ggpairs(numericOnly)
+```
+
+
+```{r VIF of altered model, echo=FALSE}
+anovaini <- matrix(c( "Age", 1.436,
+                   "Weight", 1.143,
+                   "RunTime", 1.297,
+                   "RunPulse", 8.359,
+                   "MaxPulse", 8.731), byrow = TRUE, ncol = 2)
+knitr::kable(anovaini, digits = 3, caption = "Figure 8: VIF of altered Model", 
+             col.names = c("Variable", "VIF"))
+```
+
+Then the final model was altered and updated through these procedures. Then QQ norm, Shapiro-Wilks Test and ncvTest would be carried out again to see if there are any changes. The QQ norm is plotted in Figure 9 below. Plus, the Shapiro-Wilks Test is 0.96627, which is closer to 1 than the previous 0.92131, which means the data fits much better with the normal distribution. And the p-value of ncvTest is 0.43469.
+
+###### Figure 9: QQ norm of altered Model
+```{r QQ norm of alteredModel, eval=TRUE,echo=FALSE}
+alteredModel <- update(Oxygen_Model,.~.-comp.ratio)
+qqnorm(resid(alteredModel))
+```
+
+The coefficients and confidence intervals of the final model can be seen in Figure 10.
+
+```{r Coefficients and Confidence Intervals of final Model, echo=FALSE}
+anovaini <- matrix(c( "(Intercept)", 102.204,77.532,126.876,
+                   "Age", -0.220,-0.416,-0.223,
+                   "Weight", -0.072,-0.182,0.037,
+                   "RunTime", -2.683,-3.385,-1.980,
+                   "RunPulse", -0.373,-0.615,-0.132,
+                   "MaxPulse", 0.305,0.029,0.581), byrow = TRUE, ncol = 4)
+knitr::kable(anovaini, digits = 3, caption = "Figure 10: Coefficients and Confidence Intervals of final Model", 
+             col.names = c("Variable", "Coefficient","2.5% CI","97.5% CI"))
+```
+
+\pagebreak
+
+### 2 Bootstrapping for Confidence Intervals
+
+The bootstrapping function was from the group work of Drunken Master2. And the confidence intervals of each variable of the final model can be obtained as below in Figure 11.
+
+```{r Confidence Intervals, echo=FALSE}
+anovaini <- matrix(c( "(Intercept)", 89.0,118.2,
+                   "Age", -0.3698,-0.0713,
+                   "Weight", -0.1631, -0.0260,
+                   "RunTime", -2.915, -2.071,
+                   "RunPulse", -0.5703, -0.1909,
+                   "MaxPulse", 0.1872,  0.5270 ), byrow = TRUE, ncol = 3)
+knitr::kable(anovaini, digits = 4, caption = "Figure 11: Confidence Intervals provided by bootstrapping function of final Model", 
+             col.names = c("Variable","2.5% CI","97.5% CI"))
+```
+
+\pagebreak
+
+### 3 Randomisastion Tests
+
+In order to perform randmisation test for all model terms, I chose the test for a slope parameter to see if there is a linear association between explanatory variables and the response variable in the final model. Therefore, *H0* represents the slope of the relationship is zero, that is, there is no linear association whilst *H1* represents the slope of the relationship is not zero, that is, there is linear association. The result of this can be shown in the form of histogram with abline in Figure 12.
+
+###### Figure 12: Histogram and line of estimatedSlope
+```{r Histogram and line of estimatedSlope, eval=TRUE,echo=FALSE}
+set.seed(180025784)
+alteredFitness <- fitness %>% select (-RestPulse)
+estimatedSlope <- coef(alteredModel)[2]
+simResults <- numeric(999)
+simData <- alteredFitness
+for (i in 1: 999){
+  simData$Oxygen <- sample(alteredFitness$Oxygen, 31, replace = T)
+  simLM <- lm (Oxygen~., data = simData)
+  simResults[i] <- coef(simLM)[2]
+}
+hist(simResults, col = "slateblue4")
+abline(v = estimatedSlope, lwd = 3)
+```
+
+From the figure, it can be observed that data is a little bit extreme if *H0* is true. Thus, maybe we should reject *H0*. To be more precise, I calculated the the minimum of *k*/1000 and 1-*k*/1000, where *k* is the ordered position of original sample estimate. The output of this is 0.31, which means p <0.31. Therefore, it is hard to say that *H0* can be accepted. We can say from this that there is linear association in the final model.
+
+\pagebreak
+
+
+## Discussion
+The model was fitted and updated to predict Oxygen intake rates on the basis of a series of other measurements. The final model is alteredModel. This model states that the parameters affecting Oxygen intake rates are Age, Weight, RunTime, RunPulse and MaxPulse. 
+
+The effects of the variables in alteredModel on Oxygen intake rates are as below:
+
+• As the age increases by 1 year, oxygen intake rates decreases by 0.2196 ml/kg per minute
+
+• As the weight increases by 1 kg, oxygen intake rates decreases by 0.0723 ml/kg per minute
+
+• As the runtime increases by 1 unit, oxygen intake rates decreases by 2.6825 ml/kg per minute
+
+• As the runpulse increases by 1 unit, oxygen intake rates decreases by 0.3734 ml/kg per minute
+
+• As the maxpulse increases by 1 unit, oxygen intake rates increases by 0.3049 ml/kg per minute
+
+It can be concluded from the model that elder people and heavier people will intake less oxygen rate. Also, the less the runtime and runpulse are, the less oxygen intake rates is. However, as the maxpulse increases, oxygen intake rates will increase, which is the only variable that makes oxygen intake rates high.
+
+Additionally, the partial relationships between each covariate and the response can be found in Appendix.
+
+\pagebreak
+
+
+## References
+
+Donovan, C. (2018) MT5763 Project 2 - code collaboration and computer intensive inference. [Online]
+
+Efron, B. (1987) 'Better bootstrap confidence intervals', *Journal of the American Statistical Association*, 82(397), pp. 171-385. Available at:https://www.jstor.org/stable/pdf/2289144.pdf?casa_token=4iZ6QKczb9UAAAAA:I4RQeCRasPcZkONB3D1TYhkVgOVnzqEsXLW9-hjn-n8rhEPzaW5cRm2kIi28XI00vyGc3kfo_87ThMqvfvSRjdkGsYoOyMQhLFaNXm3Rsv_pKBNGRMc/ (Accessed: 3 Nov 2018)
+
+Rawlings, J.O. (1998) *Applied regression analysis: a research tool* (2nd Edition). Berlin: Springer.
+
+R Core Team (2018) *R: A language and environment for statistical computing*. R Foundation for Statistical Computing, Vienna, Austria. Available at: https://www.R-project.org/ (Accessed: 2 Nov 2018)
+
+\pagebreak
+
+
+## Appendices
+
+### Appendix 1 *R code and output for model fitting*
+
+```{r code for model fitting, eval=TRUE}
+
+#input data
+fitness <- read.csv("/Users/apple/Desktop/MT5763/Assignment 2/fitness.csv", header = T)
+head(fitness)
+
+#fit an initial model "Oxygen_Model" to predict "Oxygen"
+Oxygen_Model <- lm(Oxygen~., data = fitness)
+summary(Oxygen_Model)
+
+#anova of the initial model
+#install.packages("car")
+library(car)
+Anova(Oxygen_Model)
+
+#choose a model by AIC and do anova for the new model
+Oxygen_Model <- step(Oxygen_Model)
+Anova(Oxygen_Model)
+
+#model diagnostics & remedial actions
+
+##model diagnostics - error shape
+qqnorm(resid(Oxygen_Model))
+qqline(resid(Oxygen_Model))
+shapiro.test(resid(Oxygen_Model))
+hist(resid(Oxygen_Model))
+###track down the extreme residuals
+bigResid <- which(abs(resid(Oxygen_Model))>5)
+fitness[bigResid,]
+
+##model diagnostics - error spread
+Oxygen_Resid <- resid(Oxygen_Model)
+plot(fitted(Oxygen_Model), Oxygen_Resid, ylab = 'residuals', xlab = 'Fitted values')
+###testing using the ncvTest
+ncvTest(Oxygen_Model, ~.)
+
+##model diagnostics - error independence (durbinWatsonTest)
+durbinWatsonTest(Oxygen_Model)
+
+##model diagnostics - default plots
+plot(Oxygen_Model, which = 1:2)
+
+##model diagnostics - collinearity
+library(GGally)
+library(tidyverse)
+numericOnly <- fitness %>% select_if(is.numeric)
+ggpairs(numericOnly)
+
+##make a better altered model
+alteredModel <- update(Oxygen_Model,.~.-comp.ratio)
+vif(alteredModel)
+
+##again: model diagnostics - error shape
+qqnorm(resid(alteredModel))
+shapiro.test((resid(alteredModel)))
+ncvTest(alteredModel)
+
+##summary of altered model
+summary(alteredModel)
+
+##anova and confidence intervals of altered model
+Anova(alteredModel)
+confint(alteredModel)
+```
+
+\pagebreak
+
+### Appendix 2 *R code and output for bootstrapping code to provide confidence intervals*
+
+```{r CIs, eval=FALSE}
+#the bootstrapping function from groupwork
+#install.packages("boot")
+library(boot)
+
+lmBoot_par <- function(inputData, nBoot){
+  #Purpose: Generate a large number of linear regression beta coefficients using
+  #         bootstrap methods.
+  #Inputs: inputData: a dataframe containing the response variable, which must be 
+  #        in the first column of the dataframe, and the covariates of interest
+  #        nBoot: the number of bootstrap samples to generate.
+  #Outputs: BootResults: An arraycontaing the parameter estimates of each 
+  #         each bootstrap sample.
+  #         ConfidenceIntervals: A matrix containing 95% confidence intervals 
+  #         for each parameter.
+  
+  #Calculate the number of observations in the dataset 
+  nObs <- nrow(inputData)
+  
+  #Create the sample data with 1s for the intercept
+  sampleData <- as.matrix(cbind(inputData[, 1], 1, inputData[, -1]))
+  
+  #Set up parallisation
+  nCores <- detectCores()
+  myClust <- makeCluster(nCores - 1, type = "PSOCK")
+  registerDoParallel(myClust)
+  
+  # Create the samples
+  bootSamples <- matrix(sample(1:nrow(inputData), nObs * nBoot, replace = T), 
+                        nrow = nObs, ncol = nBoot)
+  
+  #Use parallised sapply to apply bootLM to bootResults matrix
+  bootResults <- matrix(NA, nBoot, ncol(sampleData[, -1]))
+  bootResults <- parSapply(myClust, 1:nBoot, bootLM, inputData = sampleData, 
+                           samples = bootSamples)
+  
+  #Close parallisation
+  stopCluster(myClust)
+  
+  return(t(bootResults))
+}
+
+#results of the bootstrapping results
+#install.packages("parallel")
+#install.packages("doParallel")
+#install.packages("IPSUR")
+library(parallel)
+library(doParallel)
+library(IPSUR)
+results <- boot(data = fitness, statistic = lmBoot_par, R = 10, formula = alteredModel)
+
+#provide confidence intervals
+boot.ci(results, type = "basic", index=1) #intercept
+boot.ci(results, type = "basic", index=2) #Age
+boot.ci(results, type = "basic", index=3) #Weight
+boot.ci(results, type = "basic", index=4) #RunTime
+boot.ci(results, type = "basic", index=5) #RunPulse
+boot.ci(results, type = "basic", index=6) #MaxPulse
+```
+
+\pagebreak
+
+### Appendix 3 *R code and output for randomisation tests*
+
+```{r randomisation tests, eval=TRUE}
+set.seed(180025784)
+
+#remove the parameter "RestPulse" that is useless for the model
+alteredFitness <- fitness %>% select (-RestPulse)
+
+#compute the slope of alteredModel
+estimatedSlope <- coef(alteredModel)[2]
+
+#to store simulations
+simResults <- numeric(999)
+
+simData <- alteredFitness
+
+for (i in 1: 999){
+  #shuffle the variables WRT Oxygen
+  simData$Oxygen <- sample(alteredFitness$Oxygen, 31, replace = T)
+  #fit a model under H0
+  simLM <- lm (Oxygen~., data = simData)
+  #store the slope
+  simResults[i] <- coef(simLM)[2]
+}
+
+#draw the histogram and line of estimatedSlope to compare
+hist(simResults, col = "slateblue4")
+abline(v = estimatedSlope, lwd = 3)
+#reject H0 maybe
+
+addEst <- c(estimatedSlope, simResults)
+
+locEst <- c(1, rep(0,999))
+
+locEst <- locEst[order(addEst)]
+
+k <- which(locEst == 1)
+
+min(k/1000, 1-k/1000)*2
+
+
+###partial relationships
+termplot(alteredModel, data = alteredFitness,partial.resid = TRUE)
+```

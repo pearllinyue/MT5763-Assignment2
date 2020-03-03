@@ -1,0 +1,1075 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={MT5763-Project2 Report},
+            pdfauthor={Student ID: 180025784},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{MT5763-Project2 Report}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Student ID: 180025784}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Due 5 Novmber 2018}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\subsection{Executive Summary}\label{executive-summary}
+
+The report to build a linear model that predicts Oxygen intake rates,
+which is a measure of aerobic fitness. The data used in this report is
+from the study of Rawlings (1998), \emph{Applied Regression Analysis: A
+Research Tool} 2nd Edition. The final model was fitted using linear
+regression, diagnosed using ANOVA, AIC, qqnorm, qqline, shapiro test,
+ncvtest, Durbin Watson Test and updatad to a good one. The confidence
+intervals are provided by the bootstrapping function written by the
+group work of all members of Drunken Master2. The randomisation test is
+also carried out. The final model states that the Oxygen intake rates
+has a strong relationship with age, weight, runtime, restpulse and
+maxpulse. \pagebreak
+
+\subsection{Introduction}\label{introduction}
+
+The improvement of bootstrap function completed by Drunken Master2
+provided the basic code for the conduct of this project. The data used
+by this project is provided by Rawlings (1998).
+
+The purpose of the investigation of this report is to seek the best
+model that predicts Oxygen intake rates based on a list of measurements
+which can be obtained easily. All the data includes the following seven
+variables from 31 male samples as below:
+
+• Age: Age in years of 31 samples
+
+• Weight: Weight in kg of 31 samples
+
+• Oxygen: Oxygen intake rate in \emph{ml}/kg body weight per minute
+
+• RunTime: time for each sample to run 1.5 miles in minutes
+
+• RestPulse: heart rate when having a rest
+
+• RunPulse: heart rate after running
+
+• MaxPulse: maximum heart rate during the run
+
+The intended audience of this report should be those are statistically
+literate, but not familiar with computer-intensive inference. The
+conduct of this project are all used R 3.5.1 (R, 2018).
+
+\pagebreak
+
+\subsection{Methods}\label{methods}
+
+Due to the fact that the target audience of this report are not familiar
+with computer-intensive inference, the methods mainly contains the
+interpretation of bootstrapping and randomisation. The aim of these is
+to carry out effectively statistical simulations.
+
+\subsubsection{1 Bootstrapping function for Confidence
+Intervals}\label{bootstrapping-function-for-confidence-intervals}
+
+Bootstrapping method is a uniform sample that is put back from a given
+training set, in other words, whenever a sample is selected, it may be
+selected again and added to the training set again. The method for
+providing confidence intervals was present by Bradley Efron (1987). For
+small data set，bootstrapping works well. Boostrapping generates
+approximate sampling distributions of parameters to get confidence
+intervals
+
+\subsubsection{2 Randomisation Tests}\label{randomisation-tests}
+
+In randomisation tests, \emph{H0} refers to null hypothesis whilst
+\emph{H1} represents alternative hypothesis. Randomisation tests
+generates parameter distributions assuming if \emph{H0} is true and can
+get \emph{p}-values. Actually, there are three main ways of
+randomisation \emph{t}-test as below:
+
+• Comparison of means of two sampled populations
+
+\emph{H0}: the means of two populations are equal
+
+\emph{H1}: the means of two populations are not equal
+
+• Comparison of means of a sampled population that of some hypothesised
+value
+
+\emph{H0}: the means of the population is equal to theoretial constant
+
+\emph{H1}: the means of two populations is equal to theoretial constant
+
+• Comparison of the variant for analysing paired observations
+
+\emph{H0}: the slope of the relationship between explanatory variable
+and response variable is zero - no linear association
+
+\emph{H1}: the slope of the relationship between explanatory variable
+and response variable is not zero - linear association exists
+
+\pagebreak
+
+\subsection{Results}\label{results}
+
+\subsubsection{1 Model Fitting}\label{model-fitting}
+
+The initial model was fitted with all other variables, including Age,
+Weight, RunTime, RestPulse and MaxPulse. The coefficients of these
+variables regarding to Oxygen can be seen in Figure 1.
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Figure 1: Coefficients of the variables in the
+model}\tabularnewline
+\toprule
+Variable & Coefficient\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & Coefficient\tabularnewline
+\midrule
+\endhead
+(Intercept) & 102.934\tabularnewline
+Age & -0.227\tabularnewline
+Weight & -0.074\tabularnewline
+RunTime & -2.629\tabularnewline
+RestPulse & -0.022\tabularnewline
+RunPulse & -0.37\tabularnewline
+MaxPulse & 0.303\tabularnewline
+\bottomrule
+\end{longtable}
+
+Further analysis method ANOVA was used for initial model as in Figure 2.
+In Figure 2, we can see the p-value of each variable regarding to
+Oxygen. It is clear that RunTime has the most strongly significant
+correlation with Oxygen while RestPulse and Weight coule be not be very
+related to Oxygen. Thus, these two variables would probably be abandoned
+when we better the model. Also, RunPulse has a comparatively strongly
+significant correlation and MaxPulse and Age also affect Oxygen.
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Figure 2: ANOVA of the initial model}\tabularnewline
+\toprule
+Variable & p-value\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & p-value\tabularnewline
+\midrule
+\endhead
+Age & 0.032\tabularnewline
+Weight & 0.187\tabularnewline
+RunTime & 0\tabularnewline
+RestPulse & 0.747\tabularnewline
+RunPulse & 0.005\tabularnewline
+MaxPulse & 0.036\tabularnewline
+\bottomrule
+\end{longtable}
+
+Generally, Akaike Information Criterion (AIC) was used to select several
+fitted model objects to update the initial model. AIC method offered two
+models, one contains all six variables whose AIC score is 58.16, another
+one contains five variables (Age, Weight, RunTime, RunPulse and
+MaxPulse) whose AIC score is 56.3. Thus, AIC method automatically chose
+the latter one to be the new model. Then ANOVA method would be used
+again to check the variables of new model and see the p-value of each
+variable as in Figure 3. Although Weight still not seems to be
+sigificantly relevant with Oxygen because its p-value is more than 0.05,
+the other variables all shows inordinately to be related to Oxygen,
+which can be inferred that the new model is much better than the initial
+one.
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Figure 3: ANOVA of the new model}\tabularnewline
+\toprule
+Variable & p-value\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & p-value\tabularnewline
+\midrule
+\endhead
+Age & 0.03\tabularnewline
+Weight & 0.187\tabularnewline
+RunTime & 0\tabularnewline
+RunPulse & 0.004\tabularnewline
+MaxPulse & 0.032\tabularnewline
+\bottomrule
+\end{longtable}
+
+The model diagnostics was started to check the shape of errors by
+distribution of residuals.The QQ plot as well as the Shapiro-Wilks test
+was used in this report. The QQ plot and QQ norm can be seen in Figure 4
+which displays the data set fits this model pretty good. Also, the
+Shapiro-Wilks test shows that w = 0.92131, which means the data fits
+well with the normal distribution in that the closer w is to 1, the
+model fits better with the normal distribution.
+
+Figure 4: QQ plot of new model
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/qqplot for model after AIC-1.pdf}
+
+In addtion, the histogram of residuals of the new model can be seen in
+Figure 5. We can also track down the extreme residuals which shows that
+data in Row 15 and 17 are having extreme residuals.
+
+Figure 5: histogram of residuals of new model
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/hist for model after AIC-1.pdf}
+
+The next step of model diagnostics is error distribution, including
+check variance of residuals and Breusch-Pagan test. The error spread of
+the new model can be plotted in Figure 6. The output of ncvTest
+(i.e.~Breusch-Pagan test) is p = 0.77806, which means to choose
+\emph{H1} that the error variance varies with the level of the fitted
+value.
+
+Figure 6: plot of residuals spread
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/plot of residuals spread-1.pdf}
+
+The following step is to check serial correlation of residuals by using
+Durbin-Watson test. The \emph{p}-value of this test is 0.374
+\textgreater{} 0.05, which means the errors are correlated.
+
+And the final step is to check collinearity of the model. Figure 7 shows
+the dependencies between covariates and we use this to update the model
+into a new altered model. In additionl, Variance Inflation Factor (VIF)
+was used to check if multicollinearity exists between variables in
+Figure 8.
+
+Figure 7: Dependencies between covarites
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages -------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## √ tibble  1.4.2     √ purrr   0.2.5
+## √ tidyr   0.8.1     √ dplyr   0.7.6
+## √ readr   1.1.1     √ stringr 1.3.1
+## √ tibble  1.4.2     √ forcats 0.3.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/dependencies between covarites-1.pdf}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Figure 8: VIF of altered Model}\tabularnewline
+\toprule
+Variable & VIF\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & VIF\tabularnewline
+\midrule
+\endhead
+Age & 1.436\tabularnewline
+Weight & 1.143\tabularnewline
+RunTime & 1.297\tabularnewline
+RunPulse & 8.359\tabularnewline
+MaxPulse & 8.731\tabularnewline
+\bottomrule
+\end{longtable}
+
+Then the final model was altered and updated through these procedures.
+Then QQ norm, Shapiro-Wilks Test and ncvTest would be carried out again
+to see if there are any changes. The QQ norm is plotted in Figure 9
+below. Plus, the Shapiro-Wilks Test is 0.96627, which is closer to 1
+than the previous 0.92131, which means the data fits much better with
+the normal distribution. And the p-value of ncvTest is 0.43469.
+
+Figure 9: QQ norm of altered Model
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/QQ norm of alteredModel-1.pdf}
+
+The coefficients and confidence intervals of the final model can be seen
+in Figure 10.
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{Figure 10: Coefficients and Confidence Intervals of final
+Model}\tabularnewline
+\toprule
+Variable & Coefficient & 2.5\% CI & 97.5\% CI\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & Coefficient & 2.5\% CI & 97.5\% CI\tabularnewline
+\midrule
+\endhead
+(Intercept) & 102.204 & 77.532 & 126.876\tabularnewline
+Age & -0.22 & -0.416 & -0.223\tabularnewline
+Weight & -0.072 & -0.182 & 0.037\tabularnewline
+RunTime & -2.683 & -3.385 & -1.98\tabularnewline
+RunPulse & -0.373 & -0.615 & -0.132\tabularnewline
+MaxPulse & 0.305 & 0.029 & 0.581\tabularnewline
+\bottomrule
+\end{longtable}
+
+\pagebreak
+
+\subsubsection{2 Bootstrapping for Confidence
+Intervals}\label{bootstrapping-for-confidence-intervals}
+
+The bootstrapping function was from the group work of Drunken Master2.
+And the confidence intervals of each variable of the final model can be
+obtained as below in Figure 11.
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{Figure 11: Confidence Intervals provided by bootstrapping
+function of final Model}\tabularnewline
+\toprule
+Variable & 2.5\% CI & 97.5\% CI\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Variable & 2.5\% CI & 97.5\% CI\tabularnewline
+\midrule
+\endhead
+(Intercept) & 89 & 118.2\tabularnewline
+Age & -0.3698 & -0.0713\tabularnewline
+Weight & -0.1631 & -0.026\tabularnewline
+RunTime & -2.915 & -2.071\tabularnewline
+RunPulse & -0.5703 & -0.1909\tabularnewline
+MaxPulse & 0.1872 & 0.527\tabularnewline
+\bottomrule
+\end{longtable}
+
+\pagebreak
+
+\subsubsection{3 Randomisastion Tests}\label{randomisastion-tests}
+
+In order to perform randmisation test for all model terms, I chose the
+test for a slope parameter to see if there is a linear association
+between explanatory variables and the response variable in the final
+model. Therefore, \emph{H0} represents the slope of the relationship is
+zero, that is, there is no linear association whilst \emph{H1}
+represents the slope of the relationship is not zero, that is, there is
+linear association. The result of this can be shown in the form of
+histogram with abline in Figure 12.
+
+Figure 12: Histogram and line of estimatedSlope
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/Histogram and line of estimatedSlope-1.pdf}
+
+From the figure, it can be observed that data is a little bit extreme if
+\emph{H0} is true. Thus, maybe we should reject \emph{H0}. To be more
+precise, I calculated the the minimum of \emph{k}/1000 and
+1-\emph{k}/1000, where \emph{k} is the ordered position of original
+sample estimate. The output of this is 0.31, which means p
+\textless{}0.31. Therefore, it is hard to say that \emph{H0} can be
+accepted. We can say from this that there is linear association in the
+final model.
+
+\pagebreak
+
+\subsection{Discussion}\label{discussion}
+
+The model was fitted and updated to predict Oxygen intake rates on the
+basis of a series of other measurements. The final model is
+alteredModel. This model states that the parameters affecting Oxygen
+intake rates are Age, Weight, RunTime, RunPulse and MaxPulse.
+
+The effects of the variables in alteredModel on Oxygen intake rates are
+as below:
+
+• As the age increases by 1 year, oxygen intake rates decreases by
+0.2196 ml/kg per minute
+
+• As the weight increases by 1 kg, oxygen intake rates decreases by
+0.0723 ml/kg per minute
+
+• As the runtime increases by 1 unit, oxygen intake rates decreases by
+2.6825 ml/kg per minute
+
+• As the runpulse increases by 1 unit, oxygen intake rates decreases by
+0.3734 ml/kg per minute
+
+• As the maxpulse increases by 1 unit, oxygen intake rates increases by
+0.3049 ml/kg per minute
+
+It can be concluded from the model that elder people and heavier people
+will intake less oxygen rate. Also, the less the runtime and runpulse
+are, the less oxygen intake rates is. However, as the maxpulse
+increases, oxygen intake rates will increase, which is the only variable
+that makes oxygen intake rates high.
+
+Additionally, the partial relationships between each covariate and the
+response can be found in Appendix.
+
+\pagebreak
+
+\subsection{References}\label{references}
+
+Donovan, C. (2018) MT5763 Project 2 - code collaboration and computer
+intensive inference. {[}Online{]}
+
+Efron, B. (1987) `Better bootstrap confidence intervals', \emph{Journal
+of the American Statistical Association}, 82(397), pp.~171-385.
+Available
+at:\url{https://www.jstor.org/stable/pdf/2289144.pdf?casa_token=4iZ6QKczb9UAAAAA:I4RQeCRasPcZkONB3D1TYhkVgOVnzqEsXLW9-hjn-n8rhEPzaW5cRm2kIi28XI00vyGc3kfo_87ThMqvfvSRjdkGsYoOyMQhLFaNXm3Rsv_pKBNGRMc/}
+(Accessed: 3 Nov 2018)
+
+Rawlings, J.O. (1998) \emph{Applied regression analysis: a research
+tool} (2nd Edition). Berlin: Springer.
+
+R Core Team (2018) \emph{R: A language and environment for statistical
+computing}. R Foundation for Statistical Computing, Vienna, Austria.
+Available at: \url{https://www.R-project.org/} (Accessed: 2 Nov 2018)
+
+\pagebreak
+
+\subsection{Appendices}\label{appendices}
+
+\subsubsection{\texorpdfstring{Appendix 1 \emph{R code and output for
+model
+fitting}}{Appendix 1 R code and output for model fitting}}\label{appendix-1-r-code-and-output-for-model-fitting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#input data}
+\NormalTok{fitness <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"/Users/apple/Desktop/MT5763/Assignment 2/fitness.csv"}\NormalTok{, }\DataTypeTok{header =}\NormalTok{ T)}
+\KeywordTok{head}\NormalTok{(fitness)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Weight Oxygen RunTime RestPulse RunPulse MaxPulse
+## 1  44  89.47 44.609   11.37        62      178      182
+## 2  40  75.07 45.313   10.07        62      185      185
+## 3  44  85.84 54.297    8.65        45      156      168
+## 4  42  68.15 59.571    8.17        40      166      172
+## 5  38  89.02 49.874    9.22        55      178      180
+## 6  47  77.45 44.811   11.63        58      176      176
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#fit an initial model "Oxygen_Model" to predict "Oxygen"}
+\NormalTok{Oxygen_Model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Oxygen}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ fitness)}
+\KeywordTok{summary}\NormalTok{(Oxygen_Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Oxygen ~ ., data = fitness)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.4026 -0.8991  0.0706  1.0496  5.3847 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 102.93448   12.40326   8.299 1.64e-08 ***
+## Age          -0.22697    0.09984  -2.273  0.03224 *  
+## Weight       -0.07418    0.05459  -1.359  0.18687    
+## RunTime      -2.62865    0.38456  -6.835 4.54e-07 ***
+## RestPulse    -0.02153    0.06605  -0.326  0.74725    
+## RunPulse     -0.36963    0.11985  -3.084  0.00508 ** 
+## MaxPulse      0.30322    0.13650   2.221  0.03601 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.317 on 24 degrees of freedom
+## Multiple R-squared:  0.8487, Adjusted R-squared:  0.8108 
+## F-statistic: 22.43 on 6 and 24 DF,  p-value: 9.715e-09
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#anova of the initial model}
+\CommentTok{#install.packages("car")}
+\KeywordTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Anova}\NormalTok{(Oxygen_Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type II tests)
+## 
+## Response: Oxygen
+##            Sum Sq Df F value    Pr(>F)    
+## Age        27.746  1  5.1685  0.032235 *  
+## Weight      9.911  1  1.8461  0.186866    
+## RunTime   250.822  1 46.7233 4.538e-07 ***
+## RestPulse   0.571  1  0.1063  0.747250    
+## RunPulse   51.058  1  9.5111  0.005079 ** 
+## MaxPulse   26.491  1  4.9348  0.036007 *  
+## Residuals 128.838 24                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#choose a model by AIC and do anova for the new model}
+\NormalTok{Oxygen_Model <-}\StringTok{ }\KeywordTok{step}\NormalTok{(Oxygen_Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Start:  AIC=58.16
+## Oxygen ~ Age + Weight + RunTime + RestPulse + RunPulse + MaxPulse
+## 
+##             Df Sum of Sq    RSS    AIC
+## - RestPulse  1     0.571 129.41 56.299
+## <none>                   128.84 58.162
+## - Weight     1     9.911 138.75 58.459
+## - MaxPulse   1    26.491 155.33 61.958
+## - Age        1    27.746 156.58 62.208
+## - RunPulse   1    51.058 179.90 66.510
+## - RunTime    1   250.822 379.66 89.664
+## 
+## Step:  AIC=56.3
+## Oxygen ~ Age + Weight + RunTime + RunPulse + MaxPulse
+## 
+##            Df Sum of Sq    RSS    AIC
+## <none>                  129.41 56.299
+## - Weight    1      9.52 138.93 56.499
+## - MaxPulse  1     26.83 156.23 60.139
+## - Age       1     27.37 156.78 60.247
+## - RunPulse  1     52.60 182.00 64.871
+## - RunTime   1    320.36 449.77 92.917
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Anova}\NormalTok{(Oxygen_Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type II tests)
+## 
+## Response: Oxygen
+##           Sum Sq Df F value    Pr(>F)    
+## Age        27.37  1  5.2884   0.03010 *  
+## Weight      9.52  1  1.8394   0.18714    
+## RunTime   320.36  1 61.8892 3.186e-08 ***
+## RunPulse   52.60  1 10.1609   0.00383 ** 
+## MaxPulse   26.83  1  5.1825   0.03164 *  
+## Residuals 129.41 25                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#model diagnostics & remedial actions}
+
+\NormalTok{##model diagnostics - error shape}
+\KeywordTok{qqnorm}\NormalTok{(}\KeywordTok{resid}\NormalTok{(Oxygen_Model))}
+\KeywordTok{qqline}\NormalTok{(}\KeywordTok{resid}\NormalTok{(Oxygen_Model))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{resid}\NormalTok{(Oxygen_Model))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid(Oxygen_Model)
+## W = 0.96627, p-value = 0.4227
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(}\KeywordTok{resid}\NormalTok{(Oxygen_Model))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{###track down the extreme residuals}
+\NormalTok{bigResid <-}\StringTok{ }\KeywordTok{which}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{resid}\NormalTok{(Oxygen_Model))}\OperatorTok{>}\DecValTok{5}\NormalTok{)}
+\NormalTok{fitness[bigResid,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Age Weight Oxygen RunTime RestPulse RunPulse MaxPulse
+## 15  54  83.12 51.855   10.33        50      166      170
+## 17  51  69.63 40.836   10.95        57      168      172
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##model diagnostics - error spread}
+\NormalTok{Oxygen_Resid <-}\StringTok{ }\KeywordTok{resid}\NormalTok{(Oxygen_Model)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{fitted}\NormalTok{(Oxygen_Model), Oxygen_Resid, }\DataTypeTok{ylab =} \StringTok{'residuals'}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{'Fitted values'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{###testing using the ncvTest}
+\KeywordTok{ncvTest}\NormalTok{(Oxygen_Model, }\OperatorTok{~}\NormalTok{.)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Non-constant Variance Score Test 
+## Variance formula: ~ . 
+## Chisquare = 4.014893, Df = 7, p = 0.77806
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##model diagnostics - error independence (durbinWatsonTest)}
+\KeywordTok{durbinWatsonTest}\NormalTok{(Oxygen_Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  lag Autocorrelation D-W Statistic p-value
+##    1       0.1413284      1.690357   0.374
+##  Alternative hypothesis: rho != 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##model diagnostics - default plots}
+\KeywordTok{plot}\NormalTok{(Oxygen_Model, }\DataTypeTok{which =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-4.pdf}
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##model diagnostics - collinearity}
+\KeywordTok{library}\NormalTok{(GGally)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\NormalTok{numericOnly <-}\StringTok{ }\NormalTok{fitness }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select_if}\NormalTok{(is.numeric)}
+\KeywordTok{ggpairs}\NormalTok{(numericOnly)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##make a better altered model}
+\NormalTok{alteredModel <-}\StringTok{ }\KeywordTok{update}\NormalTok{(Oxygen_Model,.}\OperatorTok{~}\NormalTok{.}\OperatorTok{-}\NormalTok{comp.ratio)}
+\KeywordTok{vif}\NormalTok{(alteredModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Age   Weight  RunTime RunPulse MaxPulse 
+## 1.435634 1.142505 1.297127 8.358594 8.731225
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##again: model diagnostics - error shape}
+\KeywordTok{qqnorm}\NormalTok{(}\KeywordTok{resid}\NormalTok{(alteredModel))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/code for model fitting-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{((}\KeywordTok{resid}\NormalTok{(alteredModel)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  (resid(alteredModel))
+## W = 0.96627, p-value = 0.4227
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ncvTest}\NormalTok{(alteredModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 0.6102665, Df = 1, p = 0.43469
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##summary of altered model}
+\KeywordTok{summary}\NormalTok{(alteredModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Oxygen ~ Age + Weight + RunTime + RunPulse + MaxPulse, 
+##     data = fitness)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.4724 -0.8476  0.0094  0.9976  5.3807 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 102.20428   11.97929   8.532 7.13e-09 ***
+## Age          -0.21962    0.09550  -2.300  0.03010 *  
+## Weight       -0.07230    0.05331  -1.356  0.18714    
+## RunTime      -2.68252    0.34099  -7.867 3.19e-08 ***
+## RunPulse     -0.37340    0.11714  -3.188  0.00383 ** 
+## MaxPulse      0.30491    0.13394   2.277  0.03164 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.275 on 25 degrees of freedom
+## Multiple R-squared:  0.848,  Adjusted R-squared:  0.8176 
+## F-statistic:  27.9 on 5 and 25 DF,  p-value: 1.811e-09
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##anova and confidence intervals of altered model}
+\KeywordTok{Anova}\NormalTok{(alteredModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type II tests)
+## 
+## Response: Oxygen
+##           Sum Sq Df F value    Pr(>F)    
+## Age        27.37  1  5.2884   0.03010 *  
+## Weight      9.52  1  1.8394   0.18714    
+## RunTime   320.36  1 61.8892 3.186e-08 ***
+## RunPulse   52.60  1 10.1609   0.00383 ** 
+## MaxPulse   26.83  1  5.1825   0.03164 *  
+## Residuals 129.41 25                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confint}\NormalTok{(alteredModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   2.5 %       97.5 %
+## (Intercept) 77.53246619 126.87608420
+## Age         -0.41631235  -0.02293041
+## Weight      -0.18209653   0.03749185
+## RunTime     -3.38479564  -1.98025030
+## RunPulse    -0.61465745  -0.13214425
+## MaxPulse     0.02906062   0.58075505
+\end{verbatim}
+
+\pagebreak
+
+\subsubsection{\texorpdfstring{Appendix 2 \emph{R code and output for
+bootstrapping code to provide confidence
+intervals}}{Appendix 2 R code and output for bootstrapping code to provide confidence intervals}}\label{appendix-2-r-code-and-output-for-bootstrapping-code-to-provide-confidence-intervals}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#the bootstrapping function from groupwork}
+\CommentTok{#install.packages("boot")}
+\KeywordTok{library}\NormalTok{(boot)}
+
+\NormalTok{lmBoot_par <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(inputData, nBoot)\{}
+  \CommentTok{#Purpose: Generate a large number of linear regression beta coefficients using}
+  \CommentTok{#         bootstrap methods.}
+  \CommentTok{#Inputs: inputData: a dataframe containing the response variable, which must be }
+  \CommentTok{#        in the first column of the dataframe, and the covariates of interest}
+  \CommentTok{#        nBoot: the number of bootstrap samples to generate.}
+  \CommentTok{#Outputs: BootResults: An arraycontaing the parameter estimates of each }
+  \CommentTok{#         each bootstrap sample.}
+  \CommentTok{#         ConfidenceIntervals: A matrix containing 95% confidence intervals }
+  \CommentTok{#         for each parameter.}
+  
+  \CommentTok{#Calculate the number of observations in the dataset }
+\NormalTok{  nObs <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(inputData)}
+  
+  \CommentTok{#Create the sample data with 1s for the intercept}
+\NormalTok{  sampleData <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(inputData[, }\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, inputData[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]))}
+  
+  \CommentTok{#Set up parallisation}
+\NormalTok{  nCores <-}\StringTok{ }\KeywordTok{detectCores}\NormalTok{()}
+\NormalTok{  myClust <-}\StringTok{ }\KeywordTok{makeCluster}\NormalTok{(nCores }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{type =} \StringTok{"PSOCK"}\NormalTok{)}
+  \KeywordTok{registerDoParallel}\NormalTok{(myClust)}
+  
+  \CommentTok{# Create the samples}
+\NormalTok{  bootSamples <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(inputData), nObs }\OperatorTok{*}\StringTok{ }\NormalTok{nBoot, }\DataTypeTok{replace =}\NormalTok{ T), }
+                        \DataTypeTok{nrow =}\NormalTok{ nObs, }\DataTypeTok{ncol =}\NormalTok{ nBoot)}
+  
+  \CommentTok{#Use parallised sapply to apply bootLM to bootResults matrix}
+\NormalTok{  bootResults <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\OtherTok{NA}\NormalTok{, nBoot, }\KeywordTok{ncol}\NormalTok{(sampleData[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]))}
+\NormalTok{  bootResults <-}\StringTok{ }\KeywordTok{parSapply}\NormalTok{(myClust, }\DecValTok{1}\OperatorTok{:}\NormalTok{nBoot, bootLM, }\DataTypeTok{inputData =}\NormalTok{ sampleData, }
+                           \DataTypeTok{samples =}\NormalTok{ bootSamples)}
+  
+  \CommentTok{#Close parallisation}
+  \KeywordTok{stopCluster}\NormalTok{(myClust)}
+  
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{t}\NormalTok{(bootResults))}
+\NormalTok{\}}
+
+\CommentTok{#results of the bootstrapping results}
+\CommentTok{#install.packages("parallel")}
+\CommentTok{#install.packages("doParallel")}
+\CommentTok{#install.packages("IPSUR")}
+\KeywordTok{library}\NormalTok{(parallel)}
+\KeywordTok{library}\NormalTok{(doParallel)}
+\KeywordTok{library}\NormalTok{(IPSUR)}
+\NormalTok{results <-}\StringTok{ }\KeywordTok{boot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fitness, }\DataTypeTok{statistic =}\NormalTok{ lmBoot_par, }\DataTypeTok{R =} \DecValTok{10}\NormalTok{, }\DataTypeTok{formula =}\NormalTok{ alteredModel)}
+
+\CommentTok{#provide confidence intervals}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{1}\NormalTok{) }\CommentTok{#intercept}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{2}\NormalTok{) }\CommentTok{#Age}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{3}\NormalTok{) }\CommentTok{#Weight}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{4}\NormalTok{) }\CommentTok{#RunTime}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{5}\NormalTok{) }\CommentTok{#RunPulse}
+\KeywordTok{boot.ci}\NormalTok{(results, }\DataTypeTok{type =} \StringTok{"basic"}\NormalTok{, }\DataTypeTok{index=}\DecValTok{6}\NormalTok{) }\CommentTok{#MaxPulse}
+\end{Highlighting}
+\end{Shaded}
+
+\pagebreak
+
+\subsubsection{\texorpdfstring{Appendix 3 \emph{R code and output for
+randomisation
+tests}}{Appendix 3 R code and output for randomisation tests}}\label{appendix-3-r-code-and-output-for-randomisation-tests}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{180025784}\NormalTok{)}
+
+\CommentTok{#remove the parameter "RestPulse" that is useless for the model}
+\NormalTok{alteredFitness <-}\StringTok{ }\NormalTok{fitness }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{ (}\OperatorTok{-}\NormalTok{RestPulse)}
+
+\CommentTok{#compute the slope of alteredModel}
+\NormalTok{estimatedSlope <-}\StringTok{ }\KeywordTok{coef}\NormalTok{(alteredModel)[}\DecValTok{2}\NormalTok{]}
+
+\CommentTok{#to store simulations}
+\NormalTok{simResults <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(}\DecValTok{999}\NormalTok{)}
+
+\NormalTok{simData <-}\StringTok{ }\NormalTok{alteredFitness}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\StringTok{ }\DecValTok{999}\NormalTok{)\{}
+  \CommentTok{#shuffle the variables WRT Oxygen}
+\NormalTok{  simData}\OperatorTok{$}\NormalTok{Oxygen <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(alteredFitness}\OperatorTok{$}\NormalTok{Oxygen, }\DecValTok{31}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)}
+  \CommentTok{#fit a model under H0}
+\NormalTok{  simLM <-}\StringTok{ }\KeywordTok{lm}\NormalTok{ (Oxygen}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ simData)}
+  \CommentTok{#store the slope}
+\NormalTok{  simResults[i] <-}\StringTok{ }\KeywordTok{coef}\NormalTok{(simLM)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{\}}
+
+\CommentTok{#draw the histogram and line of estimatedSlope to compare}
+\KeywordTok{hist}\NormalTok{(simResults, }\DataTypeTok{col =} \StringTok{"slateblue4"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ estimatedSlope, }\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#reject H0 maybe}
+
+\NormalTok{addEst <-}\StringTok{ }\KeywordTok{c}\NormalTok{(estimatedSlope, simResults)}
+
+\NormalTok{locEst <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{999}\NormalTok{))}
+
+\NormalTok{locEst <-}\StringTok{ }\NormalTok{locEst[}\KeywordTok{order}\NormalTok{(addEst)]}
+
+\NormalTok{k <-}\StringTok{ }\KeywordTok{which}\NormalTok{(locEst }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+
+\KeywordTok{min}\NormalTok{(k}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{k}\OperatorTok{/}\DecValTok{1000}\NormalTok{)}\OperatorTok{*}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{###partial relationships}
+\KeywordTok{termplot}\NormalTok{(alteredModel, }\DataTypeTok{data =}\NormalTok{ alteredFitness,}\DataTypeTok{partial.resid =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-2.pdf}
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-3.pdf}
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-4.pdf}
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-5.pdf}
+\includegraphics{180025784-MT5763-Project2_files/figure-latex/randomisation tests-6.pdf}
+
+
+\end{document}

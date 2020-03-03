@@ -21,6 +21,7 @@ __Tasks__
 
 As a group:
 
+
 1. Modify the SAS bootstrapping macro to be more efficient. Once you have a better version - determine how much faster you have made it.
 
 1. The final function should output results to an RTF file using the Output Delivery System. This should have 95% confidence intervals for the mean, the mean estimate for each parameter and plots of the distributions of the bootstrap parameters. It need only work for one covariate.
